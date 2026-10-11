@@ -10,6 +10,26 @@ A deliberately scoped public extract of a larger quantitative research system. I
 
 > **Research and simulation, not a trading product.** This repository contains no live broker connectivity and publishes no proprietary candidate ranking, feature fusion, alpha policy, portfolio allocation, or deployment logic. It makes no profitability claim.
 
+## Demo
+
+Every number in the video is output of the bundled sample data or a paper simulation on synthetic data, not a result or a performance claim.
+
+[![Watch the superintel-research demo](docs/demo/poster.png)](docs/demo/demo.mp4)
+
+The recording shows synthetic database seed status, timestamp-aligned statistics and FDR diagnostics, a toy paper simulation, test output, and the documented public boundary and negative research posture.
+
+Reproduce the recorded workflow with the [quickstart prerequisites](#quick-start):
+
+```bash
+make bootstrap
+make -s db-status
+make -s demo
+make -s demo-paper
+make -s test
+sed -n 1,24p docs/PUBLIC_BOUNDARY.md
+sed -n 1,13p docs/RESULTS.md
+```
+
 ## Why this exists
 
 The difficult part of a quant system is not drawing a chart or fitting a model. It is making invalid experiments difficult to run and easy to detect.
