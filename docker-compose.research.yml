@@ -1,0 +1,40 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    container_name: superintel-research-timescaledb
+    ports:
+      - "127.0.0.1:${DB_PORT:-5433}:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER:-superintel_research}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-superintel_research}
+      POSTGRES_DB: ${DB_NAME:-superintel_research}
+    volumes:
+      - research_timescale_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${DB_USER:-superintel_research} -d ${DB_NAME:-superintel_research}",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    container_name: superintel-research-backend
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-superintel_research}:${DB_PASSWORD:-superintel_research}@timescaledb:5432/${DB_NAME:-superintel_research}
+      KILL_SWITCH: ${KILL_SWITCH:-0}
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  research_timescale_data:

@@ -1,0 +1,55 @@
+name: Research CI
+
+on:
+  push:
+    branches: [main, "public/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Setup through public Makefile
+        run: make setup
+
+      - name: Fail-closed quality gate
+        run: make ci
+
+      - name: Coverage report
+        run: make coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: |
+            coverage.xml
+            coverage-html/
+          retention-days: 14
+
+      - name: Timescale integration path
+        run: |
+          make db-up
+          make db-migrate
+          make db-seed
+          make db-status
+          make demo
+          make demo-paper
+
+      - name: Stop TimescaleDB
+        if: always()
+        run: make db-down

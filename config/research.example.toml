@@ -1,0 +1,18 @@
+# Example research-only configuration.
+# These values are illustrative defaults for the public synthetic workflow.
+# They are not live-trading or production parameters.
+
+[randomness]
+seed = 42
+
+[statistics]
+min_observations = 60
+fdr_alpha = 0.05
+
+[evaluation]
+train_size = 180
+test_size = 30
+purge_gap = 1
+
+[cost_model]
+round_trip_bps = 10.0

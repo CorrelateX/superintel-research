@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>SuperIntel Research Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="SuperIntel Research home">
+        <span class="brand-mark">SI</span>
+        <span>
+          <strong>SUPERINTEL</strong>
+          <small>RESEARCH CONSOLE</small>
+        </span>
+      </a>
+      <div class="system-strip" aria-live="polite">
+        <span class="status-item"><span class="status-dot" id="api-dot"></span><span id="api-status">API CHECK</span></span>
+        <span class="status-item"><i data-lucide="database"></i><span id="db-status">DB CHECK</span></span>
+        <span class="timestamp" id="last-updated">NOT SYNCED</span>
+      </div>
+      <div class="header-actions">
+        <a class="icon-button" href="/docs" title="Open API documentation" aria-label="Open API documentation"><i data-lucide="book-open"></i></a>
+        <button class="icon-button" id="refresh-all" title="Refresh console" aria-label="Refresh console"><i data-lucide="refresh-cw"></i></button>
+        <button class="kill-button" id="kill-switch" aria-pressed="false">
+          <i data-lucide="octagon"></i><span>HALT SIMULATION</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="summary-band" aria-label="Simulation account summary">
+        <div class="summary-lead">
+          <span class="eyebrow">PAPER ACCOUNT</span>
+          <strong id="account-id">paper_act_01</strong>
+        </div>
+        <dl class="metric"><dt>Equity</dt><dd id="equity">$0.00</dd></dl>
+        <dl class="metric"><dt>Cash</dt><dd id="cash">$0.00</dd></dl>
+        <dl class="metric"><dt>Realized PnL</dt><dd id="realized-pnl">$0.00</dd></dl>
+        <dl class="metric"><dt>Open positions</dt><dd id="position-count">0</dd></dl>
+        <dl class="metric"><dt>FDR discoveries</dt><dd id="fdr-count">0 / 0</dd></dl>
+      </section>
+
+      <section class="primary-grid">
+        <article class="panel diagnostics-panel">
+          <header class="panel-header">
+            <div><span class="eyebrow">STATISTICAL GATE</span><h1>Pair diagnostics</h1></div>
+            <span class="threshold">BH FDR &le; 0.05</span>
+          </header>
+          <div class="table-shell">
+            <table>
+              <thead><tr><th>Pair</th><th>Obs.</th><th>p-value</th><th>q-value</th><th>Half-life</th><th>Hedge ratio</th><th>Decision</th></tr></thead>
+              <tbody id="pairs-body"><tr><td colspan="7" class="empty">Loading diagnostics...</td></tr></tbody>
+            </table>
+          </div>
+        </article>
+
+        <aside class="panel ticket-panel">
+          <header class="panel-header">
+            <div><span class="eyebrow">DETERMINISTIC SIMULATION</span><h2>Market order</h2></div>
+            <i data-lucide="flask-conical"></i>
+          </header>
+          <form id="order-form">
+            <label>Symbol<select id="order-symbol"><option>SYNTH_A</option><option>SYNTH_B</option><option>SYNTH_C</option><option>SYNTH_D</option></select></label>
+            <fieldset>
+              <legend>Side</legend>
+              <div class="segmented">
+                <label><input type="radio" name="side" value="BUY" checked><span>Buy</span></label>
+                <label><input type="radio" name="side" value="SELL"><span>Sell</span></label>
+              </div>
+            </fieldset>
+            <div class="form-grid">
+              <label>Quantity<input id="order-quantity" type="number" min="0.0001" step="0.0001" value="10" required></label>
+              <label>Reference price<input id="order-price" type="number" min="0.01" step="0.01" value="100.00" required></label>
+            </div>
+            <button class="submit-button" type="submit"><i data-lucide="send"></i><span>Submit paper order</span></button>
+            <p class="form-status" id="order-status" aria-live="polite"></p>
+          </form>
+        </aside>
+      </section>
+
+      <section class="secondary-grid">
+        <article class="panel">
+          <header class="panel-header"><div><span class="eyebrow">INVENTORY</span><h2>Open positions</h2></div></header>
+          <div class="table-shell">
+            <table>
+              <thead><tr><th>Symbol</th><th>Quantity</th><th>Average cost</th><th>Mark</th><th>Unrealized</th></tr></thead>
+              <tbody id="positions-body"><tr><td colspan="5" class="empty">No open positions</td></tr></tbody>
+            </table>
+          </div>
+        </article>
+        <article class="panel">
+          <header class="panel-header"><div><span class="eyebrow">AUDIT TRAIL</span><h2>Recent orders</h2></div><span id="order-count" class="count">0</span></header>
+          <div class="table-shell">
+            <table>
+              <thead><tr><th>Time</th><th>Symbol</th><th>Side</th><th>Quantity</th><th>Fill</th><th>Status</th></tr></thead>
+              <tbody id="orders-body"><tr><td colspan="6" class="empty">No orders submitted</td></tr></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

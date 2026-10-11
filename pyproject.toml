@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "superintel-research"
+version = "0.1.0"
+description = "Public quantitative research and paper-simulation kernel with a pluggable private-alpha boundary."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+authors = [{ name = "Ayush Verma" }]
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "scipy>=1.13,<2",
+  "statsmodels>=0.14,<1",
+  "scikit-learn>=1.5,<2",
+]
+
+[project.optional-dependencies]
+database = [
+  "psycopg[binary]>=3.2,<4",
+]
+backend = [
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.30,<1",
+  "pydantic>=2.8,<3",
+]
+dev = [
+  "pytest>=9.0.3,<10",
+  "pytest-cov>=7,<8",
+  "ruff>=0.6,<1",
+  "pip-audit>=2.7,<3",
+  "httpx>=0.27,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/superintel_research"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F"]
+ignore = ["E501"]

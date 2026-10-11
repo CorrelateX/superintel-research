@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Credentials / local environment
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Private/runtime state — never commit
+.superintel-state/
+**/.superintel-state/
+state/
+runtime/
+logs/
+*.log
+
+# Local/private data and generated artifacts
+data/
+datasets/
+models/
+checkpoints/
+artifacts/
+*.parquet
+*.feather
+*.joblib
+*.pkl
+*.pickle
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

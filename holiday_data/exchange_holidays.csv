@@ -1,0 +1,30 @@
+exchange,holiday,date,year,status
+NYSE,New Year’s Day,2024-01-01,2024,Closed
+NYSE,Martin Luther King Jr. Day,2024-01-15,2024,Closed
+NYSE,Washington's Birthday,2024-02-19,2024,Closed
+NYSE,Good Friday,2024-03-29,2024,Closed
+NYSE,Memorial Day,2024-05-27,2024,Closed
+NYSE,Juneteenth National Independence Day,2024-06-19,2024,Closed
+NYSE,Independence Day,2024-07-04,2024,Closed
+NYSE,Labor Day,2024-09-02,2024,Closed
+NYSE,Thanksgiving Day,2024-11-28,2024,Closed
+NYSE,Christmas Day,2024-12-25,2024,Closed
+NYSE,New Year’s Day,2025-01-01,2025,Closed
+NYSE,Martin Luther King Jr. Day,2025-01-20,2025,Closed
+NYSE,Washington's Birthday,2025-02-17,2025,Closed
+NYSE,Good Friday,2025-04-18,2025,Closed
+NYSE,Memorial Day,2025-05-26,2025,Closed
+NYSE,Juneteenth National Independence Day,2025-06-19,2025,Closed
+NYSE,Independence Day,2025-07-04,2025,Closed
+NYSE,Labor Day,2025-09-01,2025,Closed
+NYSE,Thanksgiving Day,2025-11-27,2025,Closed
+NYSE,Christmas Day,2025-12-25,2025,Closed
+NASDAQ,New Year’s Day,2024-01-01,2024,Closed
+NASDAQ,Martin Luther King Jr. Day,2024-01-15,2024,Closed
+NASDAQ,Good Friday,2024-03-29,2024,Closed
+NASDAQ,Memorial Day,2024-05-27,2024,Closed
+NASDAQ,Juneteenth,2024-06-19,2024,Closed
+NASDAQ,Independence Day,2024-07-04,2024,Closed
+NASDAQ,Labor Day,2024-09-02,2024,Closed
+NASDAQ,Thanksgiving Day,2024-11-28,2024,Closed
+NASDAQ,Christmas Day,2024-12-25,2024,Closed
